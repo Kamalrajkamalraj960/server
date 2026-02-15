@@ -1,9 +1,14 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const UserModel = require("./models/Users");
 
 const app = express();
+
+require("dotenv").config();
+mongoose.connect(process.env.MONGO_URI);
+
 
 /* ================= MIDDLEWARE ================= */
 app.use(cors());
@@ -152,6 +157,11 @@ app.put("/updateUser/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+mongoose.connection.once("open", () => {
+  console.log("Connected DB:", mongoose.connection.name);
+});
+
 
 /* ================= DELETE ================= */
 app.delete("/deleteUser/:id", async (req, res) => {
