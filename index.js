@@ -79,7 +79,7 @@ app.delete("/deleteUser/:id", async (req, res) => {
     res.json({ message: "User deleted successfully" });
   } catch (err) {
     res.status(500).json({ error: err.message });
-  }
+  } 
 });
 
 /* ================= SERVER ================= */
